@@ -14,8 +14,6 @@ def validate_password(value):
         
 # Create your models here.
 class Advisor_details(models.Model):
-    id=models.IntegerField(primary_key=True)
-
     Advisor_name=models.CharField(max_length=50,default="")
     Advisor_Photo_URL=models.TextField(max_length=100000,default=1)
     
@@ -23,7 +21,6 @@ class Advisor_details(models.Model):
         return self.Advisor_name
     
 class User(models.Model):
-    id=models.IntegerField(primary_key=True)
     Name=models.CharField(max_length=100 ,blank=False)
     Email=models.EmailField(max_length=100,unique=True,blank=False)
     Password=models.CharField(max_length=50, validators=[validate_password])
