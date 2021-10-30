@@ -3,6 +3,8 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
+
+
 # ----------------------validators------------------------
 def validate_password(value):
     if len(value) < 7:
@@ -30,7 +32,7 @@ class User(models.Model):
     
 class Book_call(models.Model):
     time=models.DateTimeField(blank=False)
-    advisor_id=models.IntegerField(blank=False)
-    user_id=models.IntegerField(blank=False)
+    advisor_id=models.IntegerField(blank=True)
+    user_id=models.IntegerField(blank=True)
     
     

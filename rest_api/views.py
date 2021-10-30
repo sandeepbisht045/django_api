@@ -1,15 +1,22 @@
+from django.shortcuts import render
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.serializers import Serializer
+# from rest_framework.serializers import Serializer
 from . models import Advisor_details,User,Book_call
 from . serializers import Advisor_details_serializers,User_serializers,Book_call_serializers
 # from rest_framework.authentication import BasicAuthentication
 # from rest_framework.permissions import IsAdminUser,IsAuthenticated              
-from rest_api import serializers
+# from rest_api import serializers
 from rest_framework.decorators import api_view,authentication_classes,permission_classes
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.authentication import JWTAuthentication
-import datetime
+from django.core.validators import URLValidator
+validate=URLValidator()
+# -----------------------------------------------------------------------------------------------------------------------------------------------
+# Landing Page
+def homepage(request):
+        return render(request,"index.html")
+
 
 # API FOR SIGNUP AS A USER WITH POST REQUEST
 @api_view(["POST"])
@@ -27,9 +34,15 @@ def users(request):
         else:
                 return Response(status=status.HTTP_400_BAD_REQUEST)
         
-#   api for adding advisors with POST request      
+        
+#   API FOR ADDING ADVISORS WITH POST REQUEST      
 @api_view(["POST"])
 def Admin(request):
+        url=request.data["Advisor_Photo_URL"]
+        try:
+                validate(url)
+        except:
+                return Response({"msg":"image url is invalid"},status=status.HTTP_400_BAD_REQUEST)
         serializer=Advisor_details_serializers(data=request.data)
         if serializer.is_valid():
                 serializer.save()
@@ -37,21 +50,20 @@ def Admin(request):
         else:
                 return Response(status=status.HTTP_400_BAD_REQUEST)
 
-# api for fetching advisor details with GET request
+
+# API FOR FETCHING ADVISOR DETAILS WITH GET REQUEST
 @api_view(["GET"])
 def fetch_advisor(request,user_id):
         try:
                 verify=User.objects.get(id=user_id)         
                 data_fetch=Advisor_details.objects.all()
                 serializer=Advisor_details_serializers(data_fetch,many=True)
-                # tm=Book_call.objects.get(id=6)
-                # print((str(tm.time)))
                 return Response(serializer.data)
-                # return Response(status=status.HTTP_200_OK)
         except:
                 return  Response({"message":"user doesnot exist"},status=status.HTTP_400_BAD_REQUEST)
+       
         
-# api for login as a user with POST request
+# API FOR LOGIN AS A USER WITH POST REQUEST
 @api_view(["POST"])
 def login(request):
         email=request.data["Email"]
@@ -59,7 +71,6 @@ def login(request):
         
         try:
                 verify=User.objects.get(Email=email,Password=password)
-                # serializer=User_serializers(data=request.data)
                 return Response({"User_Id":verify.id})
                
         except:        
@@ -67,24 +78,24 @@ def login(request):
                         return Response(status=status.HTTP_400_BAD_REQUEST)
                 else:
                         return Response(status=status.HTTP_401_UNAUTHORIZED)
+     
                 
-                
-#  api for booking call with the POST request               
+#  API FOR BOOKING CALL WITH THE POST REQUEST                               
 @api_view(["POST"])
 def book_call(request,user_id,advisor_id):
-        from django.utils.dateparse import parse_datetime
-        import dateutil.parser
         try:
                 verify_user=User.objects.get(id=user_id)
-                verify_advisor=Advisor_details.objects.get(id=advisor_id)
-                booking_time=parse_datetime(request.data["time"])
-                # booking_time=(request.data["time"])
-                Book_call.objects.create(time=booking_time,advisor_id=verify_advisor,user_id=verify_user)
-                return Response(status=status.HTTP_200_OK)
+                verify_advisor=Advisor_details.objects.get(id=advisor_id)     
+                timing=request.data["time"]
+                serializer=Book_call_serializers(data={"time":timing,"advisor_id":advisor_id,"user_id":user_id})
+                if serializer.is_valid():
+                        serializer.save()
+                        return Response(status=status.HTTP_200_OK)
         except:
                 return Response(data={"msg":"either passed user_id or advisor_id is invalid"},status=status.HTTP_400_BAD_REQUEST)
 
-# api for fetching all the booked calls with GET request
+
+# API FOR FETCHING ALL THE BOOKED CALLS WITH GET REQUEST
 @api_view()
 def booking_fetch(request,user_id):
         try:

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>Home</title>
+</head>
+
+<body style="background-color: rgb(195, 231, 195);">
+    <div class="container">
+        <h2 class="m-2 text-center "
+            style="color: white; background-color: #001B54; border-radius: 11px; margin: auto;">Test this
+            Django API with the below endpoints</h2>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-6 m-2">
+                1. <a style="text-decoration: none;" href="admins/advisor">admins/advisor</a> : POST <br>
+                e.g. <p
+                    style="overflow: hidden; font-size: smaller; background-color: rgb(223, 223, 100);font-weight: bold;"
+                    class=""> { <br>
+                    "Advisor_name": "Lokesh Kumar", <br>
+                    "Advisor_Photo_URL": "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
+                    <br> }
+                </p>
+                2. <a style="text-decoration: none;" href="user/register">user/register</a> : POST <br>
+                e.g. <p style="font-size: smaller; background-color: rgb(223, 223, 100);font-weight: bold;" class=""> {
+                    <br>
+                    "Name": "Lokesh Kumar", <br>
+                    "Email": "lokeshkumar@gmail.com" , <br>
+                    "Password": "abcd123xyz"
+
+                    <br> }
+                </p>
+                3. <a style="text-decoration: none;" href="user/login">user/login</a> : POST <br>
+                e.g. <p style="font-size: smaller; background-color: rgb(223, 223, 100);font-weight: bold;" class=""> {
+                    <br>
+                    "Email": "lokeshkumar@gmail.com" , <br>
+                    "Password": "abcd123xyz"
+
+                    <br> }
+                </p>
+                4. <a style="text-decoration: none;" href="user/user_id/advisor">user/user_id/advisor</a> : GET <br>
+                e.g. <p style="font-size: smaller; background-color: rgb(223, 223, 100);font-weight: bold;" class="">
+                    user/1/advisor <br>
+                </p>
+                5. <a style="text-decoration: none;"
+                    href="user/user_id/advisor/advisor_id">user/user_id/advisor/advisor_id</a> : POST <br>
+                e.g. <p style="font-size: smaller; background-color: rgb(223, 223, 100);font-weight: bold;" class="">
+                    user/1/advisor/1 <br>
+                </p>
+                6. <a style="text-decoration: none;"
+                    href="user/user_id/advisor/booking">user/user_id/advisor/booking</a> : GET <br>
+                e.g. <p style="font-size: smaller; background-color: rgb(223, 223, 100);font-weight: bold;" class="">
+                    user/1/advisor/booking <br>
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
