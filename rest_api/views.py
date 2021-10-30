@@ -59,8 +59,8 @@ def login(request):
         
         try:
                 verify=User.objects.get(Email=email,Password=password)
-                serializer=User_serializers(data=request.data)
-                return Response(data=serializer.data["id"])
+                # serializer=User_serializers(data=request.data)
+                return Response({"User_Id":verify["id"]})
                
         except:        
                 if email=="" or password=="":
