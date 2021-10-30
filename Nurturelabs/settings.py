@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-2j&t6^=96l)+scngu7^pfq3h7falmfq=zwjeto2*+mtz!0q$5f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["localhost","https://nurturelabsapi.herokuapp.com/"]
 
