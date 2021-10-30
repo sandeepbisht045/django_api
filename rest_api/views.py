@@ -32,7 +32,7 @@ def users(request):
                         "User id":serializer.data["id"]}
                 return Response(res)    
         else:
-                return Response(status=status.HTTP_400_BAD_REQUEST)
+                return Response({"alert":"ensure that password length must be minimum of 7 characters long and email must be unique"},status=status.HTTP_400_BAD_REQUEST)
         
         
 #   API FOR ADDING ADVISORS WITH POST REQUEST      
@@ -46,7 +46,7 @@ def Admin(request):
         serializer=Advisor_details_serializers(data=request.data)
         if serializer.is_valid():
                 serializer.save()
-                return Response(status=status.HTTP_200_OK)
+                return Response({"advisor_id":serializer.data["id"]},status=status.HTTP_200_OK)
         else:
                 return Response(status=status.HTTP_400_BAD_REQUEST)
 
