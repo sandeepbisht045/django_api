@@ -9,11 +9,11 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("admins/advisor",views.Admin),
-    path("user/register",views.users,name="users"),
+    path("user/register",views.users,name="users"),  #working
     path("user/login",views.login,name="login"),
     path("user/<int:user_id>/advisor",views.fetch_advisor),  
     path("user/<int:user_id>/advisor/<int:advisor_id>",views.book_call),  
-    path("user/<int:user_id>/advisor/booking",views.booking_fetch),  
+    path("user/<int:user_id>/advisor/booking",views.booking_fetch),  #working
           
     path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("refresh/", TokenRefreshView.as_view(), name="token_refresh"),

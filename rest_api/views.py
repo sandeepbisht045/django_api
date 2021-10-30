@@ -44,8 +44,8 @@ def fetch_advisor(request,user_id):
                 verify=User.objects.get(id=user_id)         
                 data_fetch=Advisor_details.objects.all()
                 serializer=Advisor_details_serializers(data_fetch,many=True)
-                tm=Book_call.objects.get(id=6)
-                print((str(tm.time)))
+                # tm=Book_call.objects.get(id=6)
+                # print((str(tm.time)))
                 return Response(serializer.data)
                 # return Response(status=status.HTTP_200_OK)
         except:
